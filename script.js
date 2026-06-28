@@ -1,13 +1,15 @@
-// Blackline Industrial LLC
+document.addEventListener("DOMContentLoaded", () => {
+  const revealItems = document.querySelectorAll(".card, .split, .cta, .contact-grid, form");
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("Blackline Industrial website loaded.");
+  revealItems.forEach((item) => item.classList.add("reveal"));
 
-    const quoteButton = document.querySelector('a[href="#contact"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.12 });
 
-    if (quoteButton) {
-        quoteButton.addEventListener("click", function () {
-            console.log("Request a Quote button clicked.");
-        });
-    }
+  revealItems.forEach((item) => observer.observe(item));
 });
